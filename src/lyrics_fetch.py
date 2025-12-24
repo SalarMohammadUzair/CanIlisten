@@ -35,7 +35,7 @@ def get_lyrics(artist_name, track_name):
             return ("LRCLIB", lyrics)
         except Exception as e:
             print("LRCLIB error", e)
-            pass
+            
             return ("LRCLIB", None)
     #declare two functions for netease, because you need song id to get lyrics
     headers = {
@@ -52,7 +52,7 @@ def get_lyrics(artist_name, track_name):
             "X-RapidAPI-Host": "scrapesoft-music-lyrics.p.rapidapi.com",
         }
         try:
-            response = requests.get(url, headers=headers_local, params=querystring)
+            response = requests.get(url, headers=headers_local, params=querystring, timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 if data.get("lyrics"):
@@ -82,6 +82,7 @@ def get_lyrics(artist_name, track_name):
         
     #netease   
     def fetch_from_netease():
+        
         song_id = fetch_songid_from_netease()
         if not song_id:
             return("NetEase", None)
@@ -90,7 +91,6 @@ def get_lyrics(artist_name, track_name):
         params = {
             "id": song_id,
             "lv": 1,   # Get regular lyrics
-            
         }
         try: 
             response = requests.get(url,params=params, headers=headers, timeout=10)
@@ -116,7 +116,7 @@ def get_lyrics(artist_name, track_name):
         for future in as_completed(futures):
             source_name = futures[future]
             source, lyrics = future.result()
-            print(f"{source} returned:")#, lyrics)
+            #print(f"{source} returned:", lyrics)
             if lyrics and lyrics != "No lyrics in Response":
                 results.append((source, lyrics))
         if results:
@@ -128,10 +128,15 @@ def get_lyrics(artist_name, track_name):
                 "source": source
             }
 
-    #return {"artist": artist_name, "title": track_name, "lyrics": " Lyrics not found", "source": None}
+    return {"artist": artist_name, "title": track_name, "lyrics": " Lyrics not found", "source": None}
     #result = fetch_from_lrclib()
     #return result
 
 if __name__ == "__main__":
-    #print(
-        get_lyrics("Kanye West", "Heartless")
+    result = get_lyrics("Kanye West", "Heartless")
+    
+    print(f"Artist: {result['artist']}")
+    print(f"Title: {result['title']}")
+    print(f"Source: {result['source']}")
+    print(f"\nLyrics:\n{'-'*40}")
+    print(result['lyrics'])  

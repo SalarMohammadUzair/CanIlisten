@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 
-def get_lyrics(artist_name, track_name):
+def get_lyrics(artist_name, track_name, formatted = False):
     #lrclib
     def fetch_from_lrclib():
         url = "https://lrclib.net/api/get"
@@ -121,12 +121,16 @@ def get_lyrics(artist_name, track_name):
                 results.append((source, lyrics))
         if results:
             source, lyrics = results[0]    
-            return {
+            result =  {
                 "artist": artist_name, 
                 "title": track_name, 
                 "lyrics": lyrics, 
                 "source": source
             }
+        
+        if formatted:
+            return f"Artist: {artist_name}\nTitle: {track_name}\nSource: {source}\n\n{'-'*40}\n{lyrics}"
+            
 
     return {"artist": artist_name, "title": track_name, "lyrics": " Lyrics not found", "source": None}
     #result = fetch_from_lrclib()

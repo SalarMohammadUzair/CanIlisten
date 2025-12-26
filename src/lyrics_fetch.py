@@ -128,9 +128,9 @@ def get_lyrics(artist_name, track_name, formatted = False):
                 "source": source
             }
         
-        if formatted:
-            return f"Artist: {artist_name}\nTitle: {track_name}\nSource: {source}\n\n{'-'*40}\n{lyrics}"
-            
+            if formatted:
+                return f"Artist: {artist_name}\nTitle: {track_name}\nSource: {source}\n\n{'-'*40}\n{lyrics}"
+            return result
 
     return {"artist": artist_name, "title": track_name, "lyrics": " Lyrics not found", "source": None}
     #result = fetch_from_lrclib()

@@ -27,4 +27,11 @@ def save_lyrics(artist, track, dictionary):
     with open (lyrics_save_path, "w", encoding="utf-8") as f:
         json.dump(dictionary, f, ensure_ascii=False, indent=2)
     print(f"saved: {lyrics_save_path}")
- 
+def save_gemini_response(artist, track,  raw_json):
+    sub = artist_folder_check(artist)
+    safe_title = (safe_filename(track))
+    file_name = f"analysis_{safe_title}_saved.json"
+    analysis_save_path = sub / file_name
+    with open (analysis_save_path, 'w', encoding="utf-8") as f:
+        json.dump(raw_json, f, ensure_ascii=False, indent=2)
+    print(f"saved analysis: {analysis_save_path}")

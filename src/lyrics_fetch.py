@@ -15,7 +15,7 @@ def get_lyrics(artist_name, track_name, formatted = False):
             "track_name": track_name.strip().title()
         }
         try: 
-            response = requests.get(url, params = params, timeout=10) # this how we making requests
+            response = requests.get(url, params = params, timeout=5) # this how we making requests
             # safety check only, can remove later
             if response.status_code != 200:
                 print(f"Request failed with status: {response.status_code}")
@@ -71,7 +71,7 @@ def get_lyrics(artist_name, track_name, formatted = False):
             "offset": 0
         }
         try:
-            response = requests.get(url, params=params, headers=headers, timeout=10)
+            response = requests.get(url, params=params, headers=headers, timeout=5)
             data = response.json()
             result = data.get("result", {})
             if result.get("songCount", 0) > 0:
@@ -93,7 +93,7 @@ def get_lyrics(artist_name, track_name, formatted = False):
             "lv": 1,   # Get regular lyrics
         }
         try: 
-            response = requests.get(url,params=params, headers=headers, timeout=10)
+            response = requests.get(url,params=params, headers=headers, timeout=5)
             data = response.json()
             if 'lrc' in data and  data['lrc'].get('lyric'):
                 lyrics = data['lrc']['lyric']
@@ -111,26 +111,27 @@ def get_lyrics(artist_name, track_name, formatted = False):
             executor.submit(fetch_from_netease): "NetEase",
             executor.submit(fetch_from_scrapesoft): "Scrapesoft"
         }
-        results = []
+        
 
         for future in as_completed(futures):
-            source_name = futures[future]
+            
             source, lyrics = future.result()
             #print(f"{source} returned:", lyrics)
             if lyrics and lyrics != "No lyrics in Response":
-                results.append((source, lyrics))
-        if results:
-            source, lyrics = results[0]    
-            result =  {
-                "artist": artist_name, 
-                "title": track_name, 
-                "lyrics": lyrics, 
-                "source": source
-            }
-        
-            if formatted:
-                return f"Artist: {artist_name}\nTitle: {track_name}\nSource: {source}\n\n{'-'*40}\n{lyrics}"
-            return result
+                
+                
+                if formatted:
+                    return f"Artist: {artist_name}\nTitle: {track_name}\nSource: {source}\n\n{'-'*40}\n{lyrics}"
+                
+                
+                       
+                return  {
+                    "artist": artist_name, 
+                    "title": track_name, 
+                    "lyrics": lyrics, 
+                    "source": source
+                }
+                
 
     return {"artist": artist_name, "title": track_name, "lyrics": " Lyrics not found", "source": None}
     #result = fetch_from_lrclib()

@@ -28,7 +28,7 @@ function App() {
     setResult(null);
 
     try {
-      // === Stage 1: Fetch Lyrics ===
+      
       setLoadingStage('fetching');
       
       const lyricsResponse = await fetch(`${API_URL}/api/lyrics`, {
@@ -44,7 +44,7 @@ function App() {
         return;
       }
 
-      // === Stage 2: Analyze Lyrics ===
+      
       setLoadingStage('analyzing');
 
       const analysisResponse = await fetch(`${API_URL}/api/analyze`, {
@@ -105,12 +105,12 @@ function App() {
           breakdown.violation_of_rights_percent
         ],
         backgroundColor: [
-          '#98D8AA', // Pastel green
-          '#FF6B6B', // Pastel red
-          '#FFB347', // Pastel orange
-          '#C3AED6', // Pastel purple
-          '#FFB6C1', // Pastel pink
-          '#FDFD96'  // Pastel yellow
+          '#98D8AA', 
+          '#FF6B6B', 
+          '#FFB347', 
+          '#C3AED6', 
+          '#FFB6C1', 
+          '#FDFD96'  
         ],
         borderColor: '#2d2d2d',
         borderWidth: 2

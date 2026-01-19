@@ -142,7 +142,7 @@ function App() {
             <img src="/canilisten.svg" alt="Can I Listen?" />
           </div>
           <h1 className="title">CAN I LISTEN?</h1>
-          <p className="subtitle">Islamic Lyric Analyzer v1.0</p>
+          <p className="subtitle">Islamic Lyric Analyzer</p>
           <div className="marquee">
             <span>DISCLAIMER : This is a project made as a hobby and is in no way authoritative or final and has no scholarly backing.</span>
           </div>
@@ -152,7 +152,7 @@ function App() {
         <div className="box">
           <div className="box-title">[ ENTER SONG INFO ]</div>
           <div className="input-group">
-            <label>&gt; ARTIST_NAME:</label>
+            <label>&gt; ARTIST NAME:</label>
             <input
               type="text"
               value={artist}
@@ -161,7 +161,7 @@ function App() {
             />
           </div>
           <div className="input-group">
-            <label>&gt; TRACK_NAME:</label>
+            <label>&gt; TRACK NAME:</label>
             <input
               type="text"
               value={track}
@@ -287,7 +287,7 @@ function App() {
           <div className="divider">═══════════════════════════════</div>
           <p>Developed by <a href="https://github.com/SalarMohammadUzair" target="_blank" rel="noreferrer">smbleh</a></p>
           <p className="contact">For critique, please email at <a href="mailto:smbleh@proton.me">smbleh@proton.me</a></p>
-          <p className="copy">© 2025 In service of the khilafat</p>
+          <p className="copy">© 2026 In service of the khilafat</p>
         </div>
       </div>
     </div>

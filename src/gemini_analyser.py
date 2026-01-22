@@ -13,7 +13,7 @@ if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY not found in .env file")
 client = genai.Client(api_key=GEMINI_API_KEY)
 # genai.configure(api_key=GEMINI_API_KEY)
-model = ("gemini-flash-latest")
+model = ("gemini-3-pro-preview")
 #genai.GenerativeModel
 def load_prompt():
     prompt_path = Path(__file__).resolve().parent / "prompt.txt"
